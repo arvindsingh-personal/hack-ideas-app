@@ -1,11 +1,22 @@
-import { DatePicker } from "antd";
+import React from "react";
+import HackIdeas from "./components/HackIdeas";
+import HeaderComponent from "./components/Header";
+import { Outlet } from "react-router-dom";
 
-function App() {
+const App = () => {
   return (
-    <div className="">
-      <DatePicker />
+    // <Provider store={appStore}>
+    // <UserContext.Provider value={{ loggedInUser: userName, setUserName }}>
+    <div className="apps">
+      <HeaderComponent />
+      <Outlet />
     </div>
+    // </UserContext.Provider>
+    // </Provider>
   );
-}
+  // <div>
+  //   <HackIdeas />
+  // </div>
+};
 
 export default App;
