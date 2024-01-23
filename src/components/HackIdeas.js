@@ -68,7 +68,7 @@ const HackIdeas = () => {
               challenges={challenges}
               onSort={handleSort}
               onUpvote={handleUpvote}
-              onAddChallenge={() => setAddChallengeVisible(true)}
+              //   onAddChallenge={() => setAddChallengeVisible(true)}
             />
             <AddChallenge
               visible={addChallengeVisible}

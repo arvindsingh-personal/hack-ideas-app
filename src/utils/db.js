@@ -5,6 +5,7 @@ export const ChallengeListData = [
     description: "Description 1",
     tags: ["tech"],
     votes: 0,
+    creationDate: "Jan 1, 2024",
   },
   {
     id: 2,
@@ -12,5 +13,6 @@ export const ChallengeListData = [
     description: "Description 2",
     tags: ["feature"],
     votes: 0,
+    creationDate: "Jan 5, 2024",
   },
 ];

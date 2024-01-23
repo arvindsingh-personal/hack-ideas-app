@@ -68,7 +68,11 @@ const Signup = () => {
   const onFinish = (values) => {
     console.log("Received values of form: ", values);
     message.success("Registered successfully!");
-    localStorage.setItem("UserDetails", JSON.stringify(values));
+    let storedData = localStorage.getItem("UserDetails");
+    let myArray = storedData ? JSON.parse(storedData) : [];
+    myArray.push(values);
+    let updatedData = JSON.stringify(myArray);
+    localStorage.setItem("UserDetails", updatedData);
     setTimeout(() => {
       navigate("/");
     }, [2000]);

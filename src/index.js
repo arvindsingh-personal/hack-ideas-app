@@ -8,6 +8,7 @@ import ChallengeList from "./components/ChallengeList";
 import AddChallenge from "./components/AddChallenge";
 import Login from "./components/Login";
 import SignUp from "./components/Signup";
+import DatePciker from "./components/DatePicker";
 
 const appRouter = createBrowserRouter([
   {
@@ -19,19 +20,19 @@ const appRouter = createBrowserRouter([
     element: <SignUp />,
   },
   {
-    path: "/challenges",
+    path: "/home",
     element: <App />,
     children: [
+      //   {
+      //     path: "/home",
+      //     element: <DatePciker />,
+      //   },
       {
-        path: "/challenges",
-        element: <></>,
-      },
-      {
-        path: "/challenges/list",
+        path: "/home",
         element: <ChallengeList />,
       },
       {
-        path: "/challenges/addchallenges",
+        path: "/home/addchallenges",
         element: <AddChallenge />,
       },
     ],

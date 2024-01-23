@@ -1,9 +1,18 @@
 import React, { useState } from "react";
 
-import { Button, Checkbox, Form, Grid, Input, theme, Typography } from "antd";
+import {
+  Button,
+  Checkbox,
+  Form,
+  Grid,
+  Input,
+  message,
+  theme,
+  Typography,
+} from "antd";
 
 import { LockOutlined, MailOutlined, UserOutlined } from "@ant-design/icons";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const { useToken } = theme;
 const { useBreakpoint } = Grid;
@@ -12,6 +21,7 @@ const { Text, Title } = Typography;
 const Login = () => {
   const { token } = useToken();
   const screens = useBreakpoint();
+  const navigate = useNavigate();
 
   const styles = {
     container: {
@@ -54,11 +64,23 @@ const Login = () => {
 
   const onFinish = (values) => {
     console.log("Received values of form: ", values);
-  };
 
-  //   const {
-  //     token: { colorBgContainer, borderRadiusLG },
-  //   } = theme.useToken();
+    const userDetails = JSON.parse(localStorage.getItem("UserDetails"));
+    console.log(userDetails);
+
+    let userExists = userDetails.some(
+      (user) =>
+        user?.employeeId === values?.employeeId ||
+        (user?.email === values?.email && user?.password === values?.password)
+    );
+
+    if (userExists) {
+      message.success("Successfully Login!");
+      setTimeout(() => {
+        navigate("/home");
+      }, [2000]);
+    } else message.error("Employee does not exists!");
+  };
 
   return (
     <section style={styles.section}>

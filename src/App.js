@@ -1,17 +1,22 @@
-import React from "react";
+import React, { useState } from "react";
 import HackIdeas from "./components/HackIdeas";
 import HeaderComponent from "./components/Header";
 import { Outlet } from "react-router-dom";
+import { Layout } from "antd";
+import EmployeeContext from "./utils/employeeContext";
+import { ChallengeListData } from "./utils/db";
 
 const App = () => {
+  const [challenges, setChallenges] = useState(ChallengeListData);
+
   return (
     // <Provider store={appStore}>
-    // <UserContext.Provider value={{ loggedInUser: userName, setUserName }}>
-    <div className="apps">
-      <HeaderComponent />
-      <Outlet />
-    </div>
-    // </UserContext.Provider>
+    <EmployeeContext.Provider value={{ challenges, setChallenges }}>
+      <Layout>
+        <HeaderComponent />
+        <Outlet />
+      </Layout>
+    </EmployeeContext.Provider>
     // </Provider>
   );
   // <div>
