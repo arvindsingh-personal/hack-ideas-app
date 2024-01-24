@@ -66,7 +66,6 @@ const Signup = () => {
   };
 
   const onFinish = (values) => {
-    console.log("Received values of form: ", values);
     message.success("Registered successfully!");
     let storedData = localStorage.getItem("UserDetails");
     let myArray = storedData ? JSON.parse(storedData) : [];

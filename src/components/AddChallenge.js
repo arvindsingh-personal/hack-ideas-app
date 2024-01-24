@@ -33,9 +33,10 @@ const AddChallenge = () => {
     ]);
     form.resetFields();
     message.success("Challenge Created Successfully!");
-    navigate("/home");
+    setTimeout(() => {
+      navigate("/home");
+    }, [2000]);
   };
-  console.log(challenges);
 
   return (
     <div
@@ -53,8 +54,8 @@ const AddChallenge = () => {
           labelCol={{ span: 6, style: { color: "white" } }}
           wrapperCol={{ span: 18 }}
           initialValues={{ tags: [] }}
-          labelAlign="left" // Align labels to the left
-          colon={false} // Disable colon after labels
+          labelAlign="left"
+          colon={false}
           style={{ color: "white" }}
         >
           <Form.Item
@@ -63,7 +64,7 @@ const AddChallenge = () => {
             rules={[{ required: true, message: "Please enter the title!" }]}
             style={{ color: "white" }}
           >
-            <Input />
+            <Input placeholder="Title of Challenge" />
           </Form.Item>
           <Form.Item
             label="Description"
@@ -72,9 +73,15 @@ const AddChallenge = () => {
               { required: true, message: "Please enter the description!" },
             ]}
           >
-            <Input.TextArea />
+            <Input.TextArea placeholder="Description of Challenge" />
           </Form.Item>
-          <Form.Item label="Tags" name="tags">
+          <Form.Item
+            label="Tags"
+            name="tags"
+            rules={[
+              { required: true, message: "Please select atleast 1 tag!" },
+            ]}
+          >
             <Checkbox.Group options={["feature", "tech"]} />
           </Form.Item>
           <Form.Item wrapperCol={{ offset: 6, span: 18 }}>

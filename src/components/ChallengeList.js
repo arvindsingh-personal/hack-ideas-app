@@ -34,8 +34,6 @@ const ChallengeList = () => {
   const navigate = useNavigate();
 
   const handleSort = (sortBy) => {
-    console.log("sortBy", sortBy);
-
     const sortedChallenges = [...challenges].sort((a, b) => {
       if (sortBy === "dates") {
         return new Date(a.creationDate) - new Date(b.creationDate);
@@ -44,10 +42,8 @@ const ChallengeList = () => {
       }
       return 0;
     });
-    console.log("sortedChallenges", sortedChallenges);
     setChallenges(sortedChallenges);
   };
-  // console.log(challenges);
 
   const handleUpvote = (challengeId) => {
     const updatedChallenges = challenges.map((challenge) => {

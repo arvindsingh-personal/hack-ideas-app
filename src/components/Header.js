@@ -13,6 +13,7 @@ const { Title } = Typography;
 
 const HeaderComponent = () => {
   const navigate = useNavigate();
+
   const items = [
     {
       icon: <HomeOutlined style={{ fontSize: "1.6rem" }} />,

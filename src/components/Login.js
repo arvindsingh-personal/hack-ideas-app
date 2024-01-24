@@ -63,12 +63,9 @@ const Login = () => {
   const [employeeForm, setEmployeeForm] = useState(true);
 
   const onFinish = (values) => {
-    console.log("Received values of form: ", values);
-
     const userDetails = JSON.parse(localStorage.getItem("UserDetails"));
-    console.log(userDetails);
 
-    let userExists = userDetails.some(
+    let userExists = userDetails?.some(
       (user) =>
         user?.employeeId === values?.employeeId ||
         (user?.email === values?.email && user?.password === values?.password)
