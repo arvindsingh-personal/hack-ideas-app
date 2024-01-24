@@ -30,3 +30,12 @@ Your app is ready to be deployed!
 - Install @babel/preset-react - to make JSX work in test cases
 - Include @babel/preset-react inside my babel config
 - Install @testing-library/jest-dom
+
+# Usage of Application
+
+- Login to the App by EmployeeId or Password
+- Don't have an account? Create an account and then login
+- Home Page, list of all challenges
+- Sort all challenges by votes or creation date
+- To create a new Challenge, must have title, description and tags of new challenge
+- Upvote a challenge
