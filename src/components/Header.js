@@ -35,6 +35,10 @@ const HeaderComponent = () => {
   return (
     <Header
       style={{
+        position: "sticky",
+        top: 0,
+        zIndex: 1,
+        width: "100%",
         display: "flex",
         justifyContent: "space-evenly",
         alignItems: "center",

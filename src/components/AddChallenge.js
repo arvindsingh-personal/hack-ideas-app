@@ -2,16 +2,16 @@
 import React, { useEffect, useState } from "react";
 import { Modal, Form, Input, Button, Tag } from "antd";
 
-const AddChallenge = ({ visible, onCancel, onAdd }) => {
+const AddChallenge = ({ onCancel, onAdd }) => {
   const [form] = Form.useForm();
   const [tags, setTags] = useState([]);
 
   useEffect(() => {
-    if (!visible) {
+    if (!0) {
       form.resetFields();
       setTags([]);
     }
-  }, [visible]);
+  }, []);
 
   const onFinish = (values) => {
     onAdd({ ...values, tags });
@@ -33,46 +33,48 @@ const AddChallenge = ({ visible, onCancel, onAdd }) => {
   };
 
   return (
-    <Modal
-      open={visible}
-      title="Add New Challenge"
-      onCancel={onCancel}
-      footer={null}
-    >
-      <Form form={form} onFinish={onFinish}>
-        <Form.Item label="Title" name="title" rules={[{ required: true }]}>
-          <Input />
-        </Form.Item>
-        <Form.Item
-          label="Description"
-          name="description"
-          rules={[{ required: true }]}
-        >
-          <Input.TextArea />
-        </Form.Item>
-        <Form.Item label="Tags">
-          {tags.map((tag) => (
-            <Tag key={tag} closable onClose={() => handleTagClose(tag)}>
-              {tag}
-            </Tag>
-          ))}
-          <Input
-            placeholder="New Tag"
-            // value={form.getFieldValue("tag")}
-            onChange={(e) => form.setFieldsValue({ tag: e.target.value })}
-            onPressEnter={handleTagAdd}
-          />
-          <Button type="primary" onClick={handleTagAdd}>
-            Add Tag
-          </Button>
-        </Form.Item>
-        <Form.Item>
-          <Button type="primary" htmlType="submit">
-            Add Challenge
-          </Button>
-        </Form.Item>
-      </Form>
-    </Modal>
+    <>
+      <Modal
+        open={true}
+        title="Add New Challenge"
+        onCancel={onCancel}
+        footer={null}
+      >
+        <Form form={form} onFinish={onFinish}>
+          <Form.Item label="Title" name="title" rules={[{ required: true }]}>
+            <Input />
+          </Form.Item>
+          <Form.Item
+            label="Description"
+            name="description"
+            rules={[{ required: true }]}
+          >
+            <Input.TextArea />
+          </Form.Item>
+          <Form.Item label="Tags">
+            {tags.map((tag) => (
+              <Tag key={tag} closable onClose={() => handleTagClose(tag)}>
+                {tag}
+              </Tag>
+            ))}
+            <Input
+              placeholder="New Tag"
+              // value={form.getFieldValue("tag")}
+              onChange={(e) => form.setFieldsValue({ tag: e.target.value })}
+              onPressEnter={handleTagAdd}
+            />
+            <Button type="primary" onClick={handleTagAdd}>
+              Add Tag
+            </Button>
+          </Form.Item>
+          <Form.Item>
+            <Button type="primary" htmlType="submit">
+              Add Challenge
+            </Button>
+          </Form.Item>
+        </Form>
+      </Modal>
+    </>
   );
 };
 
