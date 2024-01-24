@@ -44,3 +44,16 @@ code {
   padding: 8px 0;
   background: #00a0e9;
 }
+
+.black-card {
+  background-color: #001529;
+  width: 800px;
+}
+
+.black-card .ant-form-item-no-colon {
+  color: white !important;
+}
+
+.ant-checkbox-group-item {
+  color: white !important;
+}

@@ -192,7 +192,9 @@ const Login = () => {
         )}
         <div style={styles.footer}>
           <Text style={styles.text}>Don't have an account?</Text>{" "}
-          <Link to="/register">Sign up now</Link>
+          <Link to="/register" style={{ color: "#1677FF" }}>
+            Sign up now
+          </Link>
         </div>
       </div>
     </section>

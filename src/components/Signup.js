@@ -153,7 +153,9 @@ const Signup = () => {
         </Form>
         <div style={styles.footer}>
           <Text style={styles.text}>Already have an account?</Text>{" "}
-          <Link to="/register">Sign in now</Link>
+          <Link to="/" style={{ color: "#1677FF" }}>
+            Sign in now
+          </Link>
         </div>
       </div>
     </section>

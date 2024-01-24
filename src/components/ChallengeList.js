@@ -21,6 +21,7 @@ import {
   TagFilled,
 } from "@ant-design/icons";
 import EmployeeContext from "../utils/employeeContext";
+import { useNavigate } from "react-router-dom";
 // import { Link } from "react-router-dom";
 
 const { Link, Title, Paragraph, Text } = Typography;
@@ -28,8 +29,25 @@ const { Content } = Layout;
 
 const style = { background: "#0092ff", padding: "8px 0" };
 
-const ChallengeList = ({ onSort, onUpvote, onAddChallenge }) => {
+const ChallengeList = () => {
   const { challenges, setChallenges } = useContext(EmployeeContext);
+  const navigate = useNavigate();
+
+  const handleSort = (sortBy) => {
+    console.log("sortBy", sortBy);
+
+    const sortedChallenges = [...challenges].sort((a, b) => {
+      if (sortBy === "dates") {
+        return new Date(a.creationDate) - new Date(b.creationDate);
+      } else if (sortBy === "votes") {
+        return a.votes - b.votes;
+      }
+      return 0;
+    });
+    console.log("sortedChallenges", sortedChallenges);
+    setChallenges(sortedChallenges);
+  };
+  // console.log(challenges);
 
   const handleUpvote = (challengeId) => {
     const updatedChallenges = challenges.map((challenge) => {
@@ -58,13 +76,17 @@ const ChallengeList = ({ onSort, onUpvote, onAddChallenge }) => {
         }}
       >
         <Flex gap="large" style={{ marginBottom: "3rem" }}>
-          <Button type="primary" block onClick={() => onSort("votes")}>
+          <Button type="primary" block onClick={() => handleSort("votes")}>
             Sort by Votes
           </Button>
-          <Button type="primary" block onClick={() => onSort("date")}>
+          <Button type="primary" block onClick={() => handleSort("dates")}>
             Sort by Date
           </Button>
-          <Button type="primary" block onClick={onAddChallenge}>
+          <Button
+            type="primary"
+            block
+            onClick={() => navigate("/home/addchallenges")}
+          >
             Add Challenge
           </Button>
         </Flex>
@@ -114,7 +136,7 @@ const ChallengeList = ({ onSort, onUpvote, onAddChallenge }) => {
 
       {/* Scrollable portion */}
       <Layout style={{ marginLeft: 880, height: "100%" }}>
-        <Content style={{ margin: "24px 0 0 30px", overflow: "initial" }}>
+        <Content style={{ margin: "24px 0 30px 30px", overflow: "auto" }}>
           <Space direction="vertical" size={16}>
             {challenges?.map((item) => (
               <Card

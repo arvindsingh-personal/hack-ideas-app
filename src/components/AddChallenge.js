@@ -1,80 +1,90 @@
 // src/components/AddChallenge.js
-import React, { useEffect, useState } from "react";
-import { Modal, Form, Input, Button, Tag } from "antd";
+import React, { useContext, useEffect, useState } from "react";
+import { Modal, Form, Input, Button, Tag, Card, Checkbox, message } from "antd";
+import EmployeeContext from "../utils/employeeContext";
+import { useNavigate } from "react-router-dom";
 
-const AddChallenge = ({ onCancel, onAdd }) => {
+const layout = {
+  labelCol: { span: 8 },
+  wrapperCol: { span: 16 },
+};
+
+const AddChallenge = () => {
+  const { challenges, setChallenges } = useContext(EmployeeContext);
+  const navigate = useNavigate();
   const [form] = Form.useForm();
   const [tags, setTags] = useState([]);
 
-  useEffect(() => {
-    if (!0) {
-      form.resetFields();
-      setTags([]);
-    }
-  }, []);
-
   const onFinish = (values) => {
-    onAdd({ ...values, tags });
+    const currentDate = new Date();
+    const formattedDate = currentDate.toLocaleDateString("en-US", {
+      year: "numeric",
+      month: "short",
+      day: "numeric",
+    });
+    setChallenges([
+      ...challenges,
+      {
+        ...values,
+        id: challenges.length + 1,
+        votes: 0,
+        creationDate: formattedDate,
+      },
+    ]);
     form.resetFields();
-    onCancel();
+    message.success("Challenge Created Successfully!");
+    navigate("/home");
   };
-
-  const handleTagClose = (removedTag) => {
-    const updatedTags = tags.filter((tag) => tag !== removedTag);
-    setTags(updatedTags);
-  };
-
-  const handleTagAdd = () => {
-    const newTag = form.getFieldValue("tag");
-    if (newTag && !tags.includes(newTag)) {
-      setTags([...tags, newTag]);
-      form.setFieldsValue({ tag: "" });
-    }
-  };
+  console.log(challenges);
 
   return (
-    <>
-      <Modal
-        open={true}
-        title="Add New Challenge"
-        onCancel={onCancel}
-        footer={null}
-      >
-        <Form form={form} onFinish={onFinish}>
-          <Form.Item label="Title" name="title" rules={[{ required: true }]}>
+    <div
+      style={{
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        height: "100vh",
+      }}
+    >
+      <Card className="black-card" hoverable>
+        <Form
+          onFinish={onFinish}
+          form={form}
+          labelCol={{ span: 6, style: { color: "white" } }}
+          wrapperCol={{ span: 18 }}
+          initialValues={{ tags: [] }}
+          labelAlign="left" // Align labels to the left
+          colon={false} // Disable colon after labels
+          style={{ color: "white" }}
+        >
+          <Form.Item
+            label="Title"
+            name="title"
+            rules={[{ required: true, message: "Please enter the title!" }]}
+            style={{ color: "white" }}
+          >
             <Input />
           </Form.Item>
           <Form.Item
             label="Description"
             name="description"
-            rules={[{ required: true }]}
+            rules={[
+              { required: true, message: "Please enter the description!" },
+            ]}
           >
             <Input.TextArea />
           </Form.Item>
-          <Form.Item label="Tags">
-            {tags.map((tag) => (
-              <Tag key={tag} closable onClose={() => handleTagClose(tag)}>
-                {tag}
-              </Tag>
-            ))}
-            <Input
-              placeholder="New Tag"
-              // value={form.getFieldValue("tag")}
-              onChange={(e) => form.setFieldsValue({ tag: e.target.value })}
-              onPressEnter={handleTagAdd}
-            />
-            <Button type="primary" onClick={handleTagAdd}>
-              Add Tag
-            </Button>
+          <Form.Item label="Tags" name="tags">
+            <Checkbox.Group options={["feature", "tech"]} />
           </Form.Item>
-          <Form.Item>
+          <Form.Item wrapperCol={{ offset: 6, span: 18 }}>
             <Button type="primary" htmlType="submit">
-              Add Challenge
+              Create Challenge
             </Button>
           </Form.Item>
         </Form>
-      </Modal>
-    </>
+      </Card>
+    </div>
   );
 };
 

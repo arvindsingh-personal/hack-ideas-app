@@ -2,13 +2,11 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
 import App from "./App";
-import App1 from "./App1";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import ChallengeList from "./components/ChallengeList";
 import AddChallenge from "./components/AddChallenge";
 import Login from "./components/Login";
 import SignUp from "./components/Signup";
-import DatePciker from "./components/DatePicker";
 
 const appRouter = createBrowserRouter([
   {
@@ -23,10 +21,6 @@ const appRouter = createBrowserRouter([
     path: "/home",
     element: <App />,
     children: [
-      //   {
-      //     path: "/home",
-      //     element: <DatePciker />,
-      //   },
       {
         path: "/home",
         element: <ChallengeList />,
